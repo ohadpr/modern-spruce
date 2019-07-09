@@ -1,0 +1,34 @@
+<section id="{{ include.section.section_id }}" class="block testimonials-block outer">
+  <div class="inner">
+    <div class="block-inside">
+      <div class="block-header">
+        <h2 class="block-title line-top">{{ include.section.title }}</h2>
+        {% assign subtitle_is_not_empty = include.section.subtitle | is_not_empty %}
+        {% if subtitle_is_not_empty %}
+        <p class="block-subtitle">
+          {{ include.section.subtitle }}
+        </p>
+        {% endif %}
+      </div><!-- .block-header -->
+      {% assign testimonialslist_is_not_empty = include.section.testimonialslist | is_not_empty %}
+      {% if testimonialslist_is_not_empty %}
+      <div class="block-content">
+        <div class="testimonials-list">
+          {% for testimonial in include.section.testimonialslist %}
+          <blockquote class="testimonial">
+            <p class="testimonial-text">{{ testimonial.content }}</p>
+            <footer class="testimonial-footer">
+              {% assign avatar_is_not_empty = testimonial.avatar | is_not_empty %}
+              {% if avatar_is_not_empty %}
+              <img class="testimonial-avatar" src="{{ testimonial.avatar | relative_url }}" alt="Author avatar">
+              {% endif %}
+              <cite class="testimonial-author">{{ testimonial.author }}</cite>
+            </footer>
+          </blockquote><!-- .testimonial -->
+          {% endfor %}
+        </div><!-- .testimonials-list -->
+      </div><!-- .block-content -->
+      {% endif %}
+    </div><!-- .block-inside -->
+  </div><!-- .inner -->
+</section><!-- .block -->

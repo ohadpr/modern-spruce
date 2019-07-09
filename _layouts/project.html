@@ -1,0 +1,30 @@
+---
+layout: body
+---
+
+<div class="outer">
+  <div class="inner">
+
+    <article class="post project post-full">
+      <header class="post-header inner-small">
+        <h1 class="post-title line-top">{{ page.title }}</h1>
+        {% assign subtitle_is_not_empty = page.subtitle | is_not_empty %}
+        {% if subtitle_is_not_empty %}
+        <div class="post-subtitle">
+          {{ page.subtitle }}
+        </div><!-- .post-subtitle -->
+        {% endif %}
+      </header><!-- .post-header -->
+      {% assign content_img_path_is_not_empty = page.content_img_path | is_not_empty %}
+      {% if content_img_path_is_not_empty %}
+      <div class="post-thumbnail">
+        <img src="{{ page.content_img_path | relative_url }}" alt="{{ page.title }}" />
+      </div><!-- .post-thumbnail -->
+      {% endif %}
+      <div class="post-content inner-small">
+        {{ content }}
+      </div><!-- .post-content -->
+    </article><!-- .post -->
+
+  </div><!-- .inner -->
+</div><!-- .outer-->

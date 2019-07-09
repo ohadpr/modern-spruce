@@ -1,0 +1,31 @@
+<section id="{{ include.section.section_id }}" class="block services-block outer">
+  <div class="inner">
+    <div class="block-inside">
+      <div class="block-header">
+        <h2 class="block-title line-top">{{ include.section.title }}</h2>
+        {% assign subtitle_is_not_empty = include.section.subtitle | is_not_empty %}
+        {% if subtitle_is_not_empty %}
+        <p class="block-subtitle">
+          {{ include.section.subtitle }}
+        </p>
+        {% endif %}
+      </div><!-- .block-header -->
+      {% assign serviceslist_is_not_empty = include.section.serviceslist | is_not_empty %}
+      {% if serviceslist_is_not_empty %}
+      <div class="block-content">
+        <div class="services-list">
+          {% for service in include.section.serviceslist %}
+          <div class="service">
+            <span class="service-counter" aria-hidden="true">{{ forloop.index }}.</span>
+            <h3 class="service-title">{{ service.title }}</h3>
+            <div class="service-text">
+              {{ service.content | markdownify }}
+            </div>
+          </div><!-- .service -->
+          {% endfor %}
+        </div><!-- .services-list -->
+      </div><!-- .block-content -->
+      {% endif %}
+    </div><!-- .block-inside -->
+  </div><!-- .inner -->
+</section><!-- .block -->

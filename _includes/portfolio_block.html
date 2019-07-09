@@ -1,0 +1,48 @@
+<section id="{{ include.section.section_id }}" class="portfolio-block block outer">
+  <div class="inner">
+    <div class="block-header">
+      <h2 class="block-title line-top">{{ include.section.title }}</h2>
+      {% assign subtitle_is_not_empty = include.section.subtitle | is_not_empty %}
+      {% if subtitle_is_not_empty %}
+      <p class="block-subtitle">
+        {{ include.section.subtitle }}
+      </p>
+      {% endif %}
+    </div><!-- .block-header -->
+    <div class="block-content">
+      <div class="portfolio-feed layout-{{ include.section.layout_style }}">
+        {% assign display_projects = '/projects' | get_pages | sort: 'date' | reverse %}
+        {% assign slice_length = include.section.num_projects_displayed | minus: 0 %}
+        {% assign recent_projects = display_projects | slice: 0, slice_length %}
+        {% for post in recent_projects %}
+        <article class="post project">
+          {% assign last_is_not_empty = forloop.last | is_not_empty %}
+          {% if last_is_not_empty %}
+          <a href="{{ include.section.view_all_url }}" class="post-link">
+            {% assign thumb_img_path_is_not_empty = post.thumb_img_path | is_not_empty %}
+            {% if thumb_img_path_is_not_empty %}
+            <div class="post-thumbnail">
+              <img class="thumbnail" src="{{ post.thumb_img_path | relative_url }}" alt="{{ post.title }}" />
+            </div>
+            {% endif %}
+            <span class="view-all">{{ include.section.view_all_text | default: 'View All' }}</span>
+          </a>
+          {% else %}
+          <a href="{{ post.url | relative_url }}" class="post-link">
+            {% assign thumb_img_path_is_not_empty = post.thumb_img_path | is_not_empty %}
+            {% if thumb_img_path_is_not_empty %}
+            <div class="post-thumbnail">
+              <img class="thumbnail" src="{{ post.thumb_img_path | relative_url }}" alt="{{ post.title }}" />
+            </div>
+            {% endif %}
+            <header class="post-header">
+              <h3 class="post-title">{{ post.title }}</h3>
+            </header>
+          </a><!-- .post-link -->
+          {% endif %}
+        </article><!-- .post -->
+        {% endfor %}
+      </div><!-- .portfolio-feed -->
+    </div><!-- .block-content -->
+  </div><!-- .inner -->
+</section><!-- .block -->
